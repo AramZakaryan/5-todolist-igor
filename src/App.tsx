@@ -8,19 +8,19 @@ export type FilterValuesType = "all" | "active" | "completed";
 function App() {
 
 
-    function removeTask(id: string, todolistID: string) {
+    function removeTask( todolistID: string, id: string) {
         let filteredTasks = tasks[todolistID].filter(t => t.id != id);
         tasks[todolistID] = filteredTasks
         setTasks({...tasks});
     }
 
-    function addTask(title: string, todolistID: string) {
+    function addTask(todolistID: string,title: string ) {
         let task = {id: v1(), title: title, isDone: false};
         tasks[todolistID] = [task, ...tasks[todolistID]];
         setTasks({...tasks});
     }
 
-    function changeStatus(taskId: string, isDone: boolean, todolistID: string) {
+    function changeStatus(todolistID: string,taskId: string, isDone: boolean ) {
         let task = tasks[todolistID].find(t => t.id === taskId);
         if (task) {
             task.isDone = isDone;
@@ -28,7 +28,7 @@ function App() {
         }
     }
 
-    function changeFilter(value: FilterValuesType, todolistID: string) {
+    function changeFilter(todolistID: string, value: FilterValuesType ) {
         let todolist = todolists.find(tl => tl.id === todolistID)
         if (todolist) {
             todolist.filter = value
@@ -57,6 +57,7 @@ function App() {
     type TasksType = {
         [key: string]: TaskType[]
     }
+
 
     let [tasks, setTasks] = useState<TasksType>({
         [todolistID1]: [
